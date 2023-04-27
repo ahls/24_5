@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block bodyBlock %}
+<h1>login</h1>
+<form action="/login" method="post">
+    {{ form.hidden_tag()}}
+    {% for field in form
+        if field.widget.input_type != 'hidden' %}
+        <p>
+            {{field.label}}
+            {{field}}
+            {% if field.errors %}
+                {% for error in field.errors%}
+                <p class="badge bg-danger">
+                    {{error}}
+                </p>    
+                {% endfor %}
+            {% endif %}
+        </p>
+        
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="login">
+    </form>
+    <a class="btn btn-secondary" href="/register">register</a>
+{% endblock %}

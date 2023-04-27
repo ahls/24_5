@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block bodyBlock %}
+<h1>{{user.username}}'s page</h1>
+<form>
+    <button class="btn btn-danger" formaction="/users/{{user.username}}/delete" formmethod="post">delete user</button>
+    <button class="btn btn-primary" formaction="/users/{{user.username}}/feedback/add"formmethod="get">send feedback</button>
+</form>
+<ul>
+{% for feedback in user.feedbacks%}
+    <li>
+        <h3>{{feedback.title}}</h3>
+        <div>{{feedback.content}}</div>
+        <form>
+            <button class="btn btn-secondary" formaction="/feedback/{{feedback.id}}/edit" formmethod="get">edit</button>
+            <button class="btn btn-danger" formaction="/feedback/{{feedback.id}}/delete"formmethod="post">delete</button>
+        </form>
+    </li>       
+{% endfor %}
+</ul>
+{% endblock %}

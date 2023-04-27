@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block bodyBlock %}
+<h1>send feedback</h1>
+<form action='/users/{{user.username}}/feedback/add' method="post">
+    {{ form.hidden_tag()}}
+    {% for field in form
+        if field.widget.input_type != 'hidden' %}
+        <p>
+            {{field.label}}
+            {{field}}
+            {% if field.errors %}
+                {% for error in field.errors%}
+                <p class="badge bg-danger">
+                    {{error}}
+                </p>    
+                {% endfor %}
+            {% endif %}
+        </p>
+        
+        {% endfor %}
+        <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+{% endblock %}
